@@ -1,0 +1,70 @@
+- name: mongodb
+  hosts: all
+  become: yes
+  tasks:
+    - name: Set a hostname
+      ansible.builtin.hostname:
+        - name: mongodb
+          use: systemd
+
+    - name: Setting up the MongoDB repo file
+      ansible.builtin.copy:
+        src: mongo.repo
+        dest: /etc/yum.repos.d/
+        follow: yes
+
+    - name: Installing MongoDB
+      ansible.builtin.yum:
+        name: mongodb-org
+        state: latest
+
+    - name: Updating listen address
+      ansible.builtin.replace:
+        path: /etc/mongod.conf
+        regexp: '127.0.0.1'
+        replace: '0.0.0.0'
+
+    - name: Enabling MongoDB Server
+      ansible.builtin.service:
+        name: mongo
+        enabled: yes
+
+    - name: Restarting MongoDB Server
+      ansible.builtin.service:
+        name: mongo
+        state: restarted
+
+    
+
+
+
+
+
+
+
+
+
+
+# echo -e "${color}setting the hostname${nocolor}"
+# hostnamectl set-hostname mongodb 
+# stat_check $?
+
+# echo -e "${color}Setuping the MongoDB repo file${nocolor}"
+# cp  /home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/ &>> ${log_file}
+# stat_check $?
+
+# echo -e "${color}Installing MongoDB${nocolor}"
+# dnf install mongodb-org -y &>> ${log_file}
+# stat_check $?
+
+# echo -e "${color}Enabling MongoDB${nocolor}"
+# systemctl enable mongod &>> ${log_file}
+# stat_check $?
+
+# echo -e "${color}Updating listen address${nocolor}"
+# sed -i  "s/127.0.0.1/0.0.0.0/" /etc/mongod.conf 
+# stat_check $?
+
+# echo -e "${color}Restarting MongoDB${nocolor}"
+# systemctl restart mongod &>> ${log_file}
+# stat_check $?
