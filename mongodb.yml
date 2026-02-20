@@ -26,12 +26,12 @@
 
     - name: Enabling MongoDB Server
       ansible.builtin.service:
-        name: mongo
+        name: mongod
         enabled: yes
 
     - name: Restarting MongoDB Server
       ansible.builtin.service:
-        name: mongo
+        name: mongod
         state: restarted
 
     
