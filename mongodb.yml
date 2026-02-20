@@ -4,8 +4,8 @@
   tasks:
     - name: Set a hostname
       ansible.builtin.hostname:
-        - name: mongodb
-          use: systemd
+        name: mongodb
+        use: systemd
 
     - name: Setting up the MongoDB repo file
       ansible.builtin.copy:
