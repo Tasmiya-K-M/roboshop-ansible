@@ -1,0 +1,42 @@
+- name: setting up catalogue component
+  hosts: all
+  become: yes
+  vars:
+    component: catalogue
+  tasks:
+    - name: Load NodeJS yml file
+      ansible.builtin.include_tasks:
+        file: nodejs.yml
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# source common.sh
+# component=catalogue
+
+# nodejs
+# mongodb-client-setup
+
+
+
+
+
