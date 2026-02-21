@@ -7,12 +7,6 @@
   ansible.builtin.user:
     name: roboshop
 
-- name: downloading application code
-  ansible.builtin.unarchive:
-    src: https://roboshop-artifacts.s3.amazonaws.com/{{component}}.zip
-    dest: "{{app_path}}"
-    remote_src: yes
-
 - name: Remove app directory
   ansible.builtin.file:
     path: "{{app_path}}"
@@ -22,3 +16,10 @@
   ansible.builtin.file:
     path: "{{app_path}}"
     state: directory
+
+- name: downloading application code
+  ansible.builtin.unarchive:
+    src: https://roboshop-artifacts.s3.amazonaws.com/{{component}}.zip
+    dest: "{{app_path}}"
+    remote_src: yes
+
