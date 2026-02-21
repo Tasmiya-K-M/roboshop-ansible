@@ -1,0 +1,15 @@
+- name: Creating Service File
+  ansible.builtin.copy:
+    src: "{{component}}.service"
+    dest: /etc/systemd/system/
+    follow: yes
+
+- name: Enabling {{component}} service
+  ansible.builtin.service:
+    name: "{{component}}"
+    enabled: yes
+
+- name: Restarting {{component}} Service
+  ansible.builtin.service:
+    name: "{{component}}"
+    state: restarted

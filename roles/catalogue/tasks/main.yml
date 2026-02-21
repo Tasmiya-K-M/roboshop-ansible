@@ -2,6 +2,11 @@
   ansible.builtin.import_role:
     name: common
     tasks_from: nodejs
+
+- name: mongodb-client-setup
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: mongodb-client-setup
     
 
 

@@ -1,0 +1,24 @@
+- name: Set a hostname
+  ansible.builtin.hostname:
+    name: "{{component}}"
+    use: systemd
+
+- name: Added the app user
+  ansible.builtin.user:
+    name: roboshop
+
+- name: downloading application code
+  ansible.builtin.unarchive:
+    src: https://roboshop-artifacts.s3.amazonaws.com/{{hostname}}.zip
+    dest: "{{app_path}}"
+    remote_src: yes
+
+- name: Remove app directory
+  ansible.builtin.file:
+    path: "{{app_path}}"
+    state: absent
+
+- name: Create a app directory
+  ansible.builtin.file:
+    path: "{{app_path}}"
+    state: directory
