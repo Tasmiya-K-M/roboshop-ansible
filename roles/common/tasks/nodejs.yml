@@ -10,15 +10,15 @@
   ansible.builtin.import_tasks:
     file: app_presetup.yml
 
-# - name: Install dependencies
-#   ansible.builtin.package:
-#     name: npm
-#     state: present
+- name: Install dependencies
+  ansible.builtin.shell: npm install
+  args:
+    chdir: "{{app_path}}"
 
-# - name: Load the systemd_setup yml file
-#   ansible.builtin.import_role:
-#     name: common
-#     tasks_from: systemd_setup
+- name: Load the systemd_setup yml file
+  ansible.builtin.import_tasks:
+    name: common
+    file: systemd_setup.yml
 
 
 
