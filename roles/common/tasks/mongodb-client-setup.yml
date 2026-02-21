@@ -7,4 +7,7 @@
 - name: Installing MongoDB-Client
   ansible.builtin.yum:
     name: mmongodb-org-shell
-    state: latest
+    state: Installed
+
+- name: Load the data into mongodb using mongodb-client
+  ansible.builtin.shell: mongo --host mongodb-dev.devopspro789.online <${{app_path}}/schema/${{component}}.js
