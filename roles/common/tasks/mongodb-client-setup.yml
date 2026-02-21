@@ -1,12 +1,12 @@
 - name: Setting up the mongodb-client repo file
   ansible.builtin.copy:
-    src: mongo-client.rep
+    src: mongo-client.repo
     dest: /etc/yum.repos.d/
     follow: yes
 
 - name: Installing MongoDB-Client
   ansible.builtin.yum:
-    name: mmongodb-org-shell
+    name: mongodb-org-shell
     state: Installed
 
 - name: Load the data into mongodb using mongodb-client
