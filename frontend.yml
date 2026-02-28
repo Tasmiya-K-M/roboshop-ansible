@@ -1,5 +1,6 @@
 - name: Setting up frontend
   hosts: all
+  become: yes
   tasks:
     - name: setting up hostname
       hostname:
