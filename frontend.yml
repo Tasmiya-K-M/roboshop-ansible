@@ -1,7 +1,5 @@
 - name: Setting up frontend
   hosts: all
-  vars:
-    component: frontend
   tasks:
     - name: setting up hostname
       hostname:
