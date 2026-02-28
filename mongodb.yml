@@ -11,7 +11,7 @@
         dest: /etc/yum.repos.d/
     - name: installing {{component}}
       yum:
-        name: mongodb-org -y
+        name: mongodb-org
         state: installed
     - name: Updating listen address
       replace:
