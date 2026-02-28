@@ -4,7 +4,7 @@
   tasks:
     - name: setting up hostname
       systemd:
-        "{{component}}"
+        name: "{{component}}"
     - name: installing nginx
       yum:
         name: nginx
