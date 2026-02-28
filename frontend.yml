@@ -1,5 +1,5 @@
 - name: Setting up frontend
-  hosts: all
+  hosts: frontend
   become: yes
   tasks:
     - name: setting up hostname
@@ -22,7 +22,7 @@
       copy:
         src:  roboshop.conf
         dest: /etc/nginx/default.d/
-    - name: enabling andrestarting nginx
+    - name: enabling and restarting nginx
       service:
         name: nginx
         enabled: yes
