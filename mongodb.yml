@@ -7,7 +7,7 @@
         name: "{{component}}"
     - name: Setting up the {{component}} repo file
       copy:
-        src: mongodb.repo
+        src: mongo.repo
         dest: /etc/yum.repos.d/
     - name: installing {{component}}
       yum:
