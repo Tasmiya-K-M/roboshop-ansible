@@ -1,6 +1,5 @@
 - name: Setting up frontend
-  hosts: localhost
-  connection: local
+  hosts: all
   become: yes
   tasks:
     - name: setting up hostname
