@@ -3,7 +3,7 @@
   become: yes
   tasks:
     - name: setting up hostname
-      hostname:
+      systemd:
         "{{component}}"
     - name: installing nginx
       yum:
