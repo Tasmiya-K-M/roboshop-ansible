@@ -11,7 +11,7 @@
     name: "{{app_path}}"
     state: absent
 
-- name: Remove /app folder
+- name: Creating /app folder
   file:
     name: "{{app_path}}"
     state: directory
