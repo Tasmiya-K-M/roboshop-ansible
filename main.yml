@@ -1,5 +1,5 @@
 - name: Setting up roboshop using ansible
-  hosts: frontend
+  hosts: "{{component}}"
   become: yes
   roles:
     - "{{component}}"
