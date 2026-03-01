@@ -1,0 +1,35 @@
+- name: setting up hostname
+  systemd:
+    name: "{{component}}"
+
+- name: installing {{component}}
+  yum:
+    name: "{{component}}"
+    state: installed
+
+- name: editing the config file
+  replace:
+    path: /etc/redis.conf
+    regexp: "127.0.0.1"
+    replace: "0.0.0.0"
+
+- name: Enable and Restart {{component}}
+  service:
+    name: "{{component}}"
+    enabled: yes
+    state: restarted
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
