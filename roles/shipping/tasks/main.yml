@@ -15,6 +15,7 @@
   copy: 
     src: target/{{component}}-1.0.jar
     dest: "{{component}}.jar"
+    remote_src: True
 
 -  name: load the common role
    include_role:
