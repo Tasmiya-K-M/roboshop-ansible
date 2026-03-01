@@ -1,4 +1,4 @@
-- name: Setting up {{component}}
+- name: Setting up roboshop using ansible
   hosts: all
   become: yes
   roles:
