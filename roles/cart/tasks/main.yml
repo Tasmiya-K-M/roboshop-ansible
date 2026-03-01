@@ -1,3 +1,7 @@
+- name: setting up hostname
+  systemd:
+    name: "{{component}}"
+    
 - name: loading common roles
   include_role:
     name: common
