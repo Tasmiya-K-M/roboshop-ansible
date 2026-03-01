@@ -13,7 +13,7 @@
 
 - name: copy the {{component}}.jar file
   copy: 
-    src: ./target/{{component}}-1.0.jar
+    src: /{{app_path}}/target/{{component}}-1.0.jar
     dest: "{{component}}.jar"
     remote_src: True
 
