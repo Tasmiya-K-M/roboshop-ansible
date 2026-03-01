@@ -1,5 +1,5 @@
 - name: Setting up {{component}}
-  hosts: '{{component}}'
+  hosts: frontend
   become: yes
   roles:
     - frontend
