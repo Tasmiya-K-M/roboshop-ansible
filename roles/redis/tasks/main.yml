@@ -2,13 +2,13 @@
   hostname:
     name: "{{component}}"
 
-- name: install redis repo file
+- name: install {{component}} repo file
   yum:
     name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
     state: installed
 
-- name: Enable redis 6 version
-  shell: dnf module enable redis:6 -y
+- name: Enable {{component}} 6 version
+  shell: dnf module enable {{component}}:6 -y
 
 - name: installing {{component}}
   yum:
@@ -17,13 +17,13 @@
 
 - name: editing the config file
   replace:
-    path: /etc/redis.conf
+    path: /etc/{{component}}.conf
     regexp: "127.0.0.1"
     replace: "0.0.0.0"
 
 - name: editing the config file
   replace:
-    path: /etc/redis/redis.conf
+    path: /etc/{{component}}/{{component}}.conf
     regexp: "127.0.0.1"
     replace: "0.0.0.0"
 
