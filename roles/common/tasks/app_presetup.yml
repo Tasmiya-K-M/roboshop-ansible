@@ -18,6 +18,6 @@
 
 - name: Downloading and Extracting "{{component}}" Content
   unarchive:
-    src:  https://roboshop-artifacts.s3.amazonaws.com/${component}.zip
+    src:  https://roboshop-artifacts.s3.amazonaws.com/{{component}}.zip
     dest: "{{app_path}}"
     remote_src: yes
