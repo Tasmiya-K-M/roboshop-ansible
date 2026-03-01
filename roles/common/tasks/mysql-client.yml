@@ -1,6 +1,6 @@
 - name: installing mysql-client
   yum:
-    name: "{{component}}"
+    name: "{{mysql_client}}"
     state: installed
 
 - name: load the data
