@@ -1,4 +1,4 @@
-- name: Setting up frontend
+- name: Setting up mongodb
   hosts: mongodb
   become: yes
   tasks:
