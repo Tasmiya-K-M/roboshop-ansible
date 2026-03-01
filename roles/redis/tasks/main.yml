@@ -1,5 +1,5 @@
 - name: setting up hostname
-  systemd:
+  hostname:
     name: "{{component}}"
 
 - name: installing {{component}}
