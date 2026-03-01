@@ -4,4 +4,4 @@
     state: installed
 
 - name: load the data
-  shell: mysql -h {{hostvars['mysql'].ansible_host}} -uroot -p{{mysql_client_password}} < {{app_path}}/schema/{{component}}.sql
+  command: mysql -h {{hostvars['mysql'].ansible_host}} -uroot -p{{mysql_client_password}} < {{app_path}}/schema/{{component}}.sql
