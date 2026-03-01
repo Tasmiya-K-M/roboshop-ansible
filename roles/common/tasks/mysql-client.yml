@@ -5,6 +5,7 @@
 
 - name: Load shipping schema on remote MySQL
   community.mysql.mysql_db:
+    name: "{{component}}" 
     login_user: root
     login_password: "{{mysql_client_password}}"
     login_host: "{{hostvars['mysql'].ansible_host}}"
