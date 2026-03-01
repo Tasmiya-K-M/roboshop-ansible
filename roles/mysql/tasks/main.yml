@@ -22,4 +22,4 @@
     enabled: yes
 
 - name: change the deafult mysql password
-  command: mysql_secure_installation --set-root-pass {{mysql_password}}}
+  command: mysql_secure_installation --set-root-pass RoboShop@1
