@@ -5,4 +5,4 @@ user ansible_host=user-dev.devopspro789.online ansible_user=centos ansible_passw
 cart ansible_host=cart-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=cart app_path=/app
 redis ansible_host=redis-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=redis app_path=/app
 mysql ansible_host=mysql-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=mysql app_path=/app mysql_password=RoboShop@1
-shipping ansible_host=shipping-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=shipping app_path=/app mysql_client=mysql mysql_client_password=RoboShop@1
+shipping ansible_host=shipping-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=shipping app_path=/app mysql_client=mysql mysql_password=RoboShop@1

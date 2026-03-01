@@ -3,23 +3,5 @@
     name: "{{mysql_client}}"
     state: installed
 
-- name: Load shipping schema on remote MySQL
-  community.mysql.mysql_db:
-    name: "{{component}}" 
-    login_user: root
-    login_password: "{{mysql_client_password}}"
-    login_host: "{{hostvars['mysql'].ansible_host}}"
-    login_port: 3306
-    state: import
-    target: /app/schema/{{component}}.sql
-  delegate_to: "{{component}}" 
-  become: yes
-
-
-# - name: load the data
-#   shell: mysql -h {{hostvars['mysql'].ansible_host}} -uroot -pRoboShop@1 < {{app_path}}/schema/{{component}}.sql
-
-# - name: Load the data
-#   shell: mysql -h {{hostvars['mysql'].ansible_host}} -uroot -pRoboShop@1 < {{app_path}}/schema/{{component}}.sql
-#   delegate_to: "{{mysql_client}}"
-#   become: yes
+- name: Load the data into mysql
+  shell: mysql -h {{hostvars['mysql'].ansible_host}} -uroot -p{{mysql_password}} < {{app_path}}/schema/{{component}}.sql
