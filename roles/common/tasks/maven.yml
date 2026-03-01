@@ -1,0 +1,22 @@
+- name: Install maven
+  yum:
+    name: maven
+    state: installed
+
+- name: app_presetup
+  include_tasks:
+    file: app_presetup.yml
+
+- name: install dependencies
+  shell: mvn clean package; mv target/{{component}}-1.0.jar {{component}}.jar
+  args:
+    chdir: "{{app_path}}"
+
+-  name: systemd_setup
+   include_tasks:
+    file: systemd_setup.yml
+
+- name: Load data
+  include_tasks:
+    file: mysql-client.yml
+
