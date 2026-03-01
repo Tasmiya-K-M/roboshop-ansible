@@ -1,0 +1,28 @@
+- name: Install maven
+  yum:
+    name: maven
+    state: installed
+
+- name: load the common role
+  include_role:
+    name: common
+    tasks_from: app_presetup
+
+- name: install dependencies
+  shell: mvn clean package chdir={{app_path}}
+
+- name: copy the {{component}}.jar file
+  copy: 
+    src: target/{{component}}-1.0.jar
+    dest: "{{component}}.jar"
+
+-  name: load the common role
+   include_role:
+      name: common
+      tasks_from: systemd_setup
+
+- name: load the common role
+  include_role:
+    name: common
+    tasks_from: mysql-client
+

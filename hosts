@@ -2,5 +2,6 @@ frontend ansible_host=frontend-dev.devopspro789.online ansible_user=centos ansib
 mongodb ansible_host=mongodb-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=mongodb
 catalogue ansible_host=catalogue-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=catalogue app_path=/app
 user ansible_host=user-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=user app_path=/app
-cart ansible_host=cart-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=user app_path=/app
-redis ansible_host=redis-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=user app_path=/app
+cart ansible_host=cart-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=cart app_path=/app
+redis ansible_host=redis-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=redis app_path=/app
+mysql ansible_host=mysql-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=mysql app_path=/app mysql_client_password=RoboShop@1 mysql_password=RoboShop@1
