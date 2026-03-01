@@ -1,0 +1,4 @@
+- name: loading common roles
+  include_role:
+    name: common
+    tasks_from: nodejs
