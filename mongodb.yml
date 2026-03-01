@@ -1,8 +1,8 @@
 - name: Setting up {{component}}
-  hosts: mongodb
+  hosts: frontend
   become: yes
   roles:
-    - mongodb
+    - "{{component}}"
     
 
 
