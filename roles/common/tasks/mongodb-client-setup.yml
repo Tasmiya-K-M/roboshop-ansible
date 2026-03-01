@@ -9,4 +9,4 @@
     state: installed
 
 - name: Load the data into mongodb using mongodb-client
-  command: mongo --host mongodb <{{app_path}}/schema/{{component}}.js
+  shell: mongo --host mongodb <{{app_path}}/schema/{{component}}.js
