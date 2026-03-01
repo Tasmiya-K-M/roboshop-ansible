@@ -9,4 +9,4 @@
     state: installed
 
 - name: Load the data into mongodb using mongodb-client
-  command: mongo --host {{ansible_host}} <{{app_path}}/schema/{{component}}.js
+  command: mongo --host {{hostvars['mongodb'].ansible_host}} <{{app_path}}/schema/{{component}}.js
