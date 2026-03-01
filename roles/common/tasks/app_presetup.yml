@@ -1,0 +1,23 @@
+- name: setting up hostname
+  systemd:
+    name: "{{component}}"
+
+- name: Added the app user
+  user:
+    name: roboshop
+
+- name: Remove /app folder
+  file:
+    name: "{{app_path}}"
+    state: absent
+
+- name: Remove /app folder
+  file:
+    name: "{{app_path}}"
+    state: directory
+
+- name: Downloading and Extracting "{{component}}" Content
+  unarchive:
+    src:  https://roboshop-artifacts.s3.amazonaws.com/${component}.zip
+    dest: "{{app_path}}"
+    remote_src: yes

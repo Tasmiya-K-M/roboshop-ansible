@@ -1,0 +1,12 @@
+- name: setup mongodb-client repo
+  copy: 
+    src: mongo-client.repo
+    dest: /etc/yum.repos.d/
+
+- name: Installing mongodb-client
+  yum:
+    name: mongodb-org-shell
+    state: installed
+
+- name: Load the data into mongodb using mongodb-client
+  command: mongo --host mongodb <{{app_path}}/schema/{{component}}.js

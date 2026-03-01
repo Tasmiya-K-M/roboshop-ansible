@@ -6,6 +6,16 @@
     name: nodejs
     state: installed
 
+- name: app_presetup
+  include_tasks:
+    file: app_presetup.yml
+
+- name: Installing dependencies
+  command: npm install
+
+- name: systemd_setup
+  include_tasks:
+    file: systemd_setup.yml
 
 
 
@@ -14,27 +24,3 @@
 
 
 
-
-
-
-# echo -e "${color}Disabling the default nodejs version${nocolor}"
-#     dnf module disable nodejs -y &>> ${log_file}
-#     stat_check $?
-
-#     echo -e "${color}Enabling the nodejs 18${nocolor}"
-#     dnf module enable nodejs:18 -y &>> ${log_file}
-#     stat_check $?
-
-#     #Install NodeJS
-#     echo -e "${color}Installing the nodejs 18${nocolor}"
-#     dnf install nodejs -y &>> ${log_file}
-#     stat_check $?
-
-#     app_presetup
-
-#     #download the dependencies.
-#     echo -e "${color}Downloading dependencies${nocolor}"
-#     npm install  &>> ${log_file}
-#     stat_check $?
-
-#     systemd_setup

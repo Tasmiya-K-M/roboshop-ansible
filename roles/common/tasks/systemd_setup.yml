@@ -1,0 +1,16 @@
+- name: setting up "{{component}}" service
+  copy:
+    src: "{{component}}.service"
+    dest: /etc/systemd/system/
+
+- name: Reload "{{component}}" service
+  service:
+    name: "{{component}}"
+    state: reloaded
+
+- name: Enable and Restart "{{component}}" service
+  service:
+    name: "{{component}}"
+    enabled: yes
+    state: restarted
+
