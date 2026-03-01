@@ -1,3 +1,4 @@
 frontend ansible_host=frontend-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=frontend
 mongodb ansible_host=mongodb-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=mongodb
 catalogue ansible_host=catalogue-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=catalogue app_path=/app
+user ansible_host=user-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=user app_path=/app
