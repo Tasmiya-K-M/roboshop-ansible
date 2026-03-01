@@ -1,28 +1,9 @@
-- name: Setting up mongodb
-  hosts: mongodb
+- name: Setting up {{component}}
+  hosts: "{{component}}"
   become: yes
-  tasks:
-    - name: setting up hostname
-      systemd:
-        name: "{{component}}"
-    - name: Setting up the {{component}} repo file
-      copy:
-        src: mongo.repo
-        dest: /etc/yum.repos.d/
-    - name: installing {{component}}
-      yum:
-        name: mongodb-org
-        state: installed
-    - name: Updating listen address
-      replace:
-        path: /etc/mongod.conf
-        regexp: '127.0.0.1'
-        replace: '0.0.0.0'
-    - name: enabling and restarting {{component}}
-      service:
-        name: mongod
-        enabled: yes
-        state: restarted
+  roles:
+    - mongodb
+    
 
 
 
@@ -42,16 +23,3 @@
 
 
 
-
-
-# echo -e "${color}Enabling MongoDB${nocolor}"
-# systemctl enable mongod &>> ${log_file}
-# stat_check $?
-
-# echo -e "${color}Updating listen address${nocolor}"
-# sed -i  "s/127.0.0.1/0.0.0.0/" /etc/mongod.conf 
-# stat_check $?
-
-# echo -e "${color}Restarting MongoDB${nocolor}"
-# systemctl restart mongod &>> ${log_file}
-# stat_check $?

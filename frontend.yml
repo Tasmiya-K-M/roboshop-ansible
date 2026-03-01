@@ -1,29 +1,5 @@
-- name: Setting up frontend
-  hosts: frontend
+- name: Setting up {{component}}
+  hosts: "{{component}}"
   become: yes
-  tasks:
-    - name: setting up hostname
-      systemd:
-        name: "{{component}}"
-    - name: installing nginx
-      yum:
-        name: nginx
-        state: latest
-    - name: Removing default nginx content
-      file:
-        path: /usr/share/nginx/html/*
-        state: absent  
-    - name: Downloading and Extracting "{{component}}" Content
-      unarchive:
-        src:  https://roboshop-artifacts.s3.amazonaws.com/{{component}}.zip
-        dest: /usr/share/nginx/html
-        remote_src: yes
-    - name: Creating Nginx Reverse Proxy Configuration
-      copy:
-        src:  roboshop.conf
-        dest: /etc/nginx/default.d/
-    - name: enabling and restarting nginx
-      service:
-        name: nginx
-        enabled: yes
-        state: restarted
+  roles:
+    - frontend

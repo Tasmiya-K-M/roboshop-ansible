@@ -1,0 +1,21 @@
+- name: setting up hostname
+  systemd:
+    name: "{{component}}"
+- name: Setting up the {{component}} repo file
+  copy:
+    src: mongo.repo
+    dest: /etc/yum.repos.d/
+- name: installing {{component}}
+  yum:
+    name: mongodb-org
+    state: installed
+- name: Updating listen address
+  replace:
+    path: /etc/mongod.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+- name: enabling and restarting {{component}}
+  service:
+    name: mongod
+    enabled: yes
+    state: restarted

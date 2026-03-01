@@ -1,0 +1,24 @@
+- name: Setting up {{component}}
+  hosts: "{{component}}"
+  become: yes
+  tasks:
+    - name: loading nodejs setup tasks
+      include_tasks:
+        file: nodejs.yml
+    - name: loading mongodb-client setup tasks
+      include_tasks:
+        file:  mongodb-client-setup.yml
+
+
+
+
+
+
+
+
+
+
+
+
+
+
