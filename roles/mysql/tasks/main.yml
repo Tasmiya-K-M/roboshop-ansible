@@ -21,5 +21,11 @@
     state: restarted
     enabled: yes
 
-- name: setting up root password
-  command: mysql_secure_installation --set-root-pass RoboShop@1
+- name: Get temporary MySQL root password
+  shell: grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}'
+  register: mysql_temp_pass
+
+- name: Set MySQL root password
+  shell: >
+    mysql --connect-expired-password -uroot -p'{{ mysql_temp_pass.stdout }}'
+    -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';"
