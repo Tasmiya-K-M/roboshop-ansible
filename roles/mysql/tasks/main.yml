@@ -16,7 +16,7 @@
     state: installed
 
 - name: Enable and Restart "{{component}}" service
-  service:
+  systemd:
     name: mysqld
     state: restarted
     enabled: yes
