@@ -22,7 +22,17 @@
     enabled: yes
 
 - name: setting up root password
-  shell: mysql_secure_installation --set-root-pass RoboShop@1
+  expect:
+    command: mysql_secure_installation
+    responses:
+      "Enter password for user root:": ""
+      "Set root password? \[Y/n\]": "Y"
+      "New password:": "RoboShop@1"
+      "Re-enter new password:": "RoboShop@1"
+      "Remove anonymous users? \[Y/n\]": "Y"
+      "Disallow root login remotely? \[Y/n\]": "Y"
+      "Remove test database and access to it? \[Y/n\]": "Y"
+      "Reload privilege tables now? \[Y/n\]": "Y"
 
 
   
