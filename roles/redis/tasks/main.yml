@@ -2,15 +2,10 @@
   hostname:
     name: "{{component}}"
 
-- name: install {{component}} repo file
-  yum:
-    name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
-    state: present
-
 - name: Enable {{component}} 6 version
   shell: dnf module enable {{component}}:6 -y
   args:
-    creates: "/etc/dnf/modules.d/{{component}}.module"
+    creates: /etc/dnf/modules.d/redis.module
 
 - name: installing {{component}}
   yum:
