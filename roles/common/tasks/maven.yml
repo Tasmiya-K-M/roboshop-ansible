@@ -12,11 +12,11 @@
   args:
     chdir: "{{app_path}}"
 
--  name: systemd_setup
-   include_tasks:
-    file: systemd_setup.yml
-
 - name: Load data
   include_tasks:
     file: mysql-client.yml
+
+-  name: systemd_setup
+   include_tasks:
+    file: systemd_setup.yml
 
