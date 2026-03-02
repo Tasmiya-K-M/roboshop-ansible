@@ -23,3 +23,6 @@
 
 - name: setting up root password
   shell: mysql_secure_installation --set-root-pass RoboShop@1
+
+
+  
