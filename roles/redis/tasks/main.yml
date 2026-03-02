@@ -5,7 +5,7 @@
 - name: install {{component}} repo file
   yum:
     name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
-    state: installed
+    state: present
 
 - name: Enable {{component}} 6 version
   shell: dnf module enable {{component}}:6 -y
