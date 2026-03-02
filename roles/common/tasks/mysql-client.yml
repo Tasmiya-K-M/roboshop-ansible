@@ -3,5 +3,9 @@
     name: "{{mysql_client}}"
     state: installed
 
-- name: Load the data into mysql
-  shell: mysql -h {{hostvars['mysql'].ansible_host}} -uroot -p{{mysql_password}} < {{app_path}}/schema/{{component}}.sql
+- name: Load the schema into MySQL
+  shell: >
+    mysql -h {{ hostvars['mysql'].ansible_host }}
+          -uroot
+          -p'{{ mysql_password }}'
+          < {{ app_path }}/schema/{{ component }}.sql
