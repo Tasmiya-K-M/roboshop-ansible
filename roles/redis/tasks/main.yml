@@ -18,13 +18,6 @@
     regexp: "127.0.0.1"
     replace: "0.0.0.0"
 
-- name: editing the config file
-  replace:
-    path: /etc/{{component}}/{{component}}.conf
-    regexp: "127.0.0.1"
-    replace: "0.0.0.0"
-
-
 - name: Enable and Restart {{component}}
   service:
     name: "{{component}}"
