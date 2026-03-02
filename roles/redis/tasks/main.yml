@@ -9,6 +9,8 @@
 
 - name: Enable {{component}} 6 version
   shell: dnf module enable {{component}}:6 -y
+  args:
+    creates: "/etc/dnf/modules.d/{{component}}.module"
 
 - name: installing {{component}}
   yum:
