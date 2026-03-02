@@ -21,5 +21,14 @@
     state: restarted
     enabled: yes
 
-- name: change the deafult mysql password
-  shell: mysql_secure_installation --set-root-pass {{mysql_password}}
+- name: Get temporary root password
+  shell: grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}'
+  register: mysql_temp_password
+  changed_when: false
+
+- name: Set MySQL root password
+  shell: >
+    mysql --connect-expired-password
+    -u root -p'{{ mysql_temp_password.stdout }}'
+    -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{ mysql_password }}';"
+  when: mysql_temp_password.stdout != ""
