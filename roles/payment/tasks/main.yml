@@ -1,0 +1,40 @@
+- name: installing the python
+  yum:
+    name: python36 gcc python3-devel
+    state: installed
+
+- name: app_presetup
+  include_role:
+    name: common
+    tasks_from: app_presetup
+
+- name: installing dependencies
+  shell: pip3.6 install -r requirements.txt
+  args:
+    chdir: "{{app_path}}"
+
+- name: systemd_setup
+  include_role:
+    name: common
+    tasks_from: systemd_setup
+
+
+
+
+
+# python() {
+    
+#     #install python
+#     echo -e "${color}install python${nocolor}"
+#     dnf install python36 gcc python3-devel -y &>> ${log_file}
+#     stat_check $?
+
+#     app_presetup
+
+#     #install the dependencies
+#     echo -e "${color}install the dependencies${nocolor}"
+#     pip3.6 install -r requirements.txt &>> ${log_file}
+#     stat_check $?
+
+#     systemd_setup
+# }
