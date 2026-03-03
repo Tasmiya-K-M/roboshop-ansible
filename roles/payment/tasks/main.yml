@@ -3,7 +3,7 @@
     name: python36 gcc python3-devel
     state: installed
 
-- name: app_presetup
+- name: app_presetup for {{component}}
   include_role:
     name: common
     tasks_from: app_presetup
@@ -13,7 +13,7 @@
   args:
     chdir: "{{app_path}}"
 
-- name: systemd_setup
+- name: systemd_setup {{component}}
   include_role:
     name: common
     tasks_from: systemd_setup
