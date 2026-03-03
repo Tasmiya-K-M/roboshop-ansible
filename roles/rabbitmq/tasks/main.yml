@@ -1,0 +1,32 @@
+- name: setting up hostname
+  hostname:
+    name: "{{component}}"
+
+- name: installing the erlang
+  yum:
+    shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
+
+- name: install repo
+  yum:
+    shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash
+
+- name: installing rabbitmq
+  yum:
+    name: "{{component}}-server"
+    state: installed
+
+- name: enable and restart {{component}} service
+  service:
+    name: "{{component}}-server"
+    enabled: yes
+    state: restarted
+
+- name: creating {{component}} user
+  community.rabbitmq.rabbitmq_user:
+    user: roboshop
+    password: "{{rabbitmq_passwod}}"
+    vhost: /
+    configure_priv: .*
+    read_priv: .*
+    write_priv: .*
+    state: present
