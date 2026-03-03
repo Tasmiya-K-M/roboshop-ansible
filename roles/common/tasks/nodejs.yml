@@ -15,7 +15,7 @@
 
 - name: mongodb-client-setup
   include_tasks:
-    file: mongodb-client-setup
+    file: mongodb-client-setup.yml
   when: load_schema
 
 - name: systemd_setup
