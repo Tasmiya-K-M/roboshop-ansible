@@ -1,0 +1,4 @@
+component: shipping 
+app_path: /app 
+mysql_client: mysql 
+mysql_password: RoboShop@1

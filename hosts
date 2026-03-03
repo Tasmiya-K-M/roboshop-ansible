@@ -1,10 +1,10 @@
-frontend ansible_host=frontend-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=frontend
-mongodb ansible_host=mongodb-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=mongodb
-catalogue ansible_host=catalogue-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=catalogue app_path=/app
-user ansible_host=user-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=user app_path=/app
-cart ansible_host=cart-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=cart app_path=/app
-redis ansible_host=redis-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=redis app_path=/app
-mysql ansible_host=mysql-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=mysql app_path=/app mysql_password=RoboShop@1
-shipping ansible_host=shipping-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=shipping app_path=/app mysql_client=mysql mysql_password=RoboShop@1
-rabbitmq ansible_host=rabbitmq-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=rabbitmq rabbitmq_passwod=roboshop123
-payment ansible_host=payment-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 component=payment app_path=/app mysql_password=RoboShop@1
+frontend ansible_host=frontend-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321
+mongodb ansible_host=mongodb-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 
+catalogue ansible_host=catalogue-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 
+user ansible_host=user-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 
+cart ansible_host=cart-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 
+redis ansible_host=redis-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321
+mysql ansible_host=mysql-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 
+shipping ansible_host=shipping-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 
+rabbitmq ansible_host=rabbitmq-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 
+payment ansible_host=payment-dev.devopspro789.online ansible_user=centos ansible_password=DevOps321 
