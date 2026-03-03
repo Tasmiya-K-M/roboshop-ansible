@@ -15,17 +15,34 @@
     name: mysql-community-server
     state: installed
 
-- name: Enable and Restart "{{component}}" service
-  systemd:
-    name: mysqld
-    state: restarted
-    enabled: yes
-
 - name: Get latest MySQL temporary password
   shell: grep 'temporary password' /var/log/mysqld.log | tail -1 | awk '{print $NF}'
   register: mysql_temp_pass
 
 - name: Set MySQL root password
-  shell: >
-    mysql --connect-expired-password -uroot -p'{{ mysql_temp_pass.stdout }}'
-    -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';"
+  shell: |
+    # 1. Set password for existing root@localhost
+    mysql --connect-expired-password -uroot -p'{{ mysql_temp_pass.stdout }}' \
+      -e "ALTER USER 'root'@'localhost' IDENTIFIED BY {{mysql_password}};"
+
+    # 2. Create root@% if it doesn't exist
+    mysql -uroot -p{{mysql_password}} -e "CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY {{mysql_password}};"
+
+    # 3. Grant all privileges to root@%
+    mysql -uroot -p{{mysql_password}} -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;"
+
+    # 4. Apply privileges
+    mysql -uroot -p{{mysql_password}} -e "FLUSH PRIVILEGES;"
+
+    # 5. Allow connections from all interfaces
+    if ! grep -q '^bind-address' /etc/my.cnf; then
+      sed -i '/^\[mysqld\]/a bind-address = 0.0.0.0' /etc/my.cnf
+    else
+      sed -i 's/^bind-address.*/bind-address = 0.0.0.0/' /etc/my.cnf
+    fi
+
+- name: Enable and Restart "{{component}}" service
+  systemd:
+    name: mysqld
+    state: restarted
+    enabled: yes
