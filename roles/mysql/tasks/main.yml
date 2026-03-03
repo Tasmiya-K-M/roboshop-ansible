@@ -45,16 +45,12 @@
     mysql -uroot -p'{{ mysql_password }}' -e "FLUSH PRIVILEGES;"
 
 - name: Ensure MySQL listens on all interfaces
-  block:
-    - name: Add bind-address if missing
-      shell: >
-        sed -i '/^\[mysqld\]/a bind-address = 0.0.0.0' /etc/my.cnf
-      when: "'bind-address' not in lookup('file', '/etc/my.cnf')"
-
-    - name: Update bind-address if exists
-      shell: >
-        sed -i 's/^bind-address.*/bind-address = 0.0.0.0/' /etc/my.cnf
-      when: "'bind-address' in lookup('file', '/etc/my.cnf')"
+  shell: |
+    if ! grep -q '^bind-address' /etc/my.cnf; then
+      sed -i '/^\[mysqld\]/a bind-address = 0.0.0.0' /etc/my.cnf
+    else
+      sed -i 's/^bind-address.*/bind-address = 0.0.0.0/' /etc/my.cnf
+    fi
 
 - name: Restart MySQL
   systemd:
