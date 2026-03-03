@@ -23,7 +23,7 @@
   shell: |
     # 1. Set password for existing root@localhost
     mysql --connect-expired-password -uroot -p'{{ mysql_temp_pass.stdout }}' \
-      -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{mysql_password}'};"
+      -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{mysql_password}}';"
 
     # 2. Create root@% if it doesn't exist
     mysql -uroot -p'{{mysql_password}}' -e "CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY '{{mysql_password}}';"
