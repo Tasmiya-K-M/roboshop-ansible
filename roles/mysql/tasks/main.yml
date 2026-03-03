@@ -21,14 +21,17 @@
     state: restarted
     enabled: yes
 
-- name: Get latest MySQL temporary password
-  shell: grep 'temporary password' /var/log/mysqld.log | tail -1 | awk '{print $NF}'
-  register: mysql_temp_pass
+- name: Check if MySQL root can login
+  shell: mysql -uroot -p'{{ mysql_password }}' -e "SELECT 1;"
+  register: mysql_root_check
+  failed_when: false
+  changed_when: false
 
-- name: Set MySQL root password for localhost
+- name: Set MySQL root password using temporary password
   shell: >
     mysql --connect-expired-password -uroot -p'{{ mysql_temp_pass.stdout }}'
     -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{ mysql_password }}';"
+  when: mysql_root_check.rc != 0
 
 # - name: Create root@% if not exists
 #   shell: >
