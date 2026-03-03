@@ -3,9 +3,20 @@
     name: mysql
     state: installed
 
-- name: Load the schema into MySQL
+- name: Check if the 'cities' database exists
   shell: >
     mysql -h {{hostvars['mysql'].ansible_host}}
           -uroot
-          -p{{mysql_password}}
-          < /app/schema/{{component}}.sql
+          -p{{ mysql_password }}
+          -e "SHOW DATABASES LIKE 'cities';"
+  register: cities_db_check
+  failed_when: false
+  changed_when: false
+
+- name: Load cities schema if database does not exist
+  shell: >
+    mysql -h {{hostvars['mysql'].ansible_host}}
+          -uroot
+          -p{{ mysql_password }}
+          < {{app_path}}/schema/{{component}}.sql
+  when: cities_db_check.stdout.find("cities") == -1
