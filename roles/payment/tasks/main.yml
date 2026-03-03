@@ -1,6 +1,9 @@
 - name: installing the python
   yum:
-    name: python36 gcc python3-devel
+    name:   
+      - python36
+      - gcc
+      - python3-devel
     state: installed
 
 - name: app_presetup for {{component}}
