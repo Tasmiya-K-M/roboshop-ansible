@@ -3,22 +3,7 @@
     name: mysql
     state: installed
 
-# - name: Check if the 'cities' database exists
-#   shell: >
-#     mysql -h {{hostvars['mysql'].ansible_host}}
-#           -uroot
-#           -p{{ mysql_password }}
-#           -N -e "SELECT COUNT(*) FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME='cities';"
-#   register: cities_db_check
-#   failed_when: false
-#   changed_when: false
-
 - name: Load cities schema
   shell: |
     mysql -h {{hostvars['mysql'].ansible_host}} -uroot -p'{{ mysql_password }}' \
     -e "source {{app_path}}/schema/{{component}}.sql;"
-  register: cities_db_check
-
-- name: print the value of cities_db_check
-  debug:
-    var: cities_db_check
