@@ -19,4 +19,4 @@
           -uroot
           -p{{ mysql_password }}
           < {{app_path}}/schema/{{component}}.sql
-  when: cities_db_check.stdout|int == 0
+  when: cities_db_check.stdout | trim | int == 0
