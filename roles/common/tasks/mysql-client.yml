@@ -8,4 +8,4 @@
     mysql -h {{hostvars['mysql'].ansible_host}}
           -uroot
           -p{{mysql_password}}
-          < /app/schema/{component}.sql
+          < /app/schema/{{component}}.sql
