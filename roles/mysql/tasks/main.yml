@@ -25,15 +25,38 @@
   shell: grep 'temporary password' /var/log/mysqld.log | tail -1 | awk '{print $NF}'
   register: mysql_temp_pass
 
-- name: Set MySQL root password
+- name: Set MySQL root password for localhost
   shell: >
-    mysql --connect-expired-password -uroot -p'{{ mysql_temp_pass.stdout }}' -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{mysql_password}}';"
-    mysql -uroot -p'{{mysql_password}}' -e "CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY '{{mysql_password}}';"
-    mysql -uroot -p'{{mysql_password}}' -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;"
-    mysql -uroot -p'{{mysql_password}}' -e "FLUSH PRIVILEGES;"
-    if ! grep -q '^bind-address' /etc/my.cnf; then
-      sed -i '/^\[mysqld\]/a bind-address = 0.0.0.0' /etc/my.cnf
-    else
-      sed -i 's/^bind-address.*/bind-address = 0.0.0.0/' /etc/my.cnf
-    fi
-    systemctl restart mysqld
+    mysql --connect-expired-password -uroot -p'{{ mysql_temp_pass.stdout }}'
+    -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{ mysql_password }}';"
+
+- name: Create root@% if not exists
+  shell: >
+    mysql -uroot -p'{{ mysql_password }}'
+    -e "CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY '{{ mysql_password }}';"
+
+- name: Grant all privileges to root@%
+  shell: >
+    mysql -uroot -p'{{ mysql_password }}'
+    -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;"
+
+- name: Flush privileges
+  shell: >
+    mysql -uroot -p'{{ mysql_password }}' -e "FLUSH PRIVILEGES;"
+
+- name: Ensure MySQL listens on all interfaces
+  block:
+    - name: Add bind-address if missing
+      shell: >
+        sed -i '/^\[mysqld\]/a bind-address = 0.0.0.0' /etc/my.cnf
+      when: "'bind-address' not in lookup('file', '/etc/my.cnf')"
+
+    - name: Update bind-address if exists
+      shell: >
+        sed -i 's/^bind-address.*/bind-address = 0.0.0.0/' /etc/my.cnf
+      when: "'bind-address' in lookup('file', '/etc/my.cnf')"
+
+- name: Restart MySQL
+  systemd:
+    name: mysqld
+    state: restarted
