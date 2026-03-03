@@ -1,3 +1,2 @@
 component: cart 
 app_path: /app
-load_schema: false
